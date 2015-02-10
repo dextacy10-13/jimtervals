@@ -7,7 +7,7 @@ var intervalsTask = {
         //this works but ajax a url that then curls
         $.ajax({
             type: "POST",
-            url: "http://jimtervals/taskOpen.php?taskid=" + elem + "&update=true&title=" + inputTitle,
+            url: "/taskOpen.php?taskid=" + elem + "&update=true&title=" + inputTitle,
             data: '',
             success: function(data) {
             }

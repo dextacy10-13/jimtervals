@@ -1,8 +1,8 @@
 <?php
 /**
- * Summary ViewTaskOpen
+ * Summary ViewMilestone
  *
- * Description. sorts 'Open' tasks by module and includes the view file that lists the tasks
+ * Description. gets a drop down of the current Milestones so that you can generate a spreadsheet of tasks associated with that Spreadsheet
  *
  * @link @mr_james_myers - www.mrjamesmyers.co.uk
  * @since 02FEB2015

@@ -16,9 +16,8 @@ class ViewTaskSpreadsheet extends ViewTemplate{
     
     public function getViewTaskSpreadsheet(){
         
-        $aTask = $this->oController->getCurlIntervalsTask();
-        
-        $file = 'excelFile-'.date("Y-M-D")."-".time().'.xls';
+        $aTask = $this->oController->getCurlIntervalsTask();        
+        $file = 'Site-test-release-' . $aTask['task'][0]['milestone'] . '-generated.xls';
         ob_start();
             include 'view.taskSpreadsheet.php';       
             $content = ob_get_contents();
