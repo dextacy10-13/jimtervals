@@ -101,7 +101,7 @@ abstract class ControllerCurl implements iCurl{
 		//check for curl errors
 		if( curl_errno($this->ch) ){
 			$this->curlError = curl_error($this->ch);
-            echo '<h1>',$this->curlError,'</h1>';
+            echo '<h1>',$this->curlError,'</h1>'; // probably want to log this error rather than dump it?
 			
 		}
 		// close cURL resource, and free up system resources
