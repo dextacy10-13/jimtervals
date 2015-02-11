@@ -9,6 +9,11 @@ Getting Started
  5. In order to get your Intervals API key you should log in to your Intervals account. Hover over 'options' on the right hand side then click 'My Account' then in the Sub Navigation Bar underneath the main navigation click 'API Access'
  6. If you have a token already generated then copy and paste that into the INTERVALS_API_KEY constant, if not then click 'Generate token'
 
+MVC (really MVP)
+ 1. The main application is split into Models, Views and Controller which resemble a simple MVC/MVP structure.  Although in current use there has been no need to develop models as we handle request data in our Controllers and then either get/set data from the Intervals API and then present the data to our view files.
+ 2. For more information about Models,Views and Controllers see their relevant sections
+
+
 Polling Intervals API (Intervals API documentation can be found here http://www.myintervals.com/api/ )
  1. The Core functionality resides in two abstract classes
      a.  ControllerCurl located in this file  /app/MVC/controller/controller.curl.php
