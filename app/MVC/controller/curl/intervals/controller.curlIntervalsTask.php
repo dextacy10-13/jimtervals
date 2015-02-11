@@ -24,8 +24,12 @@ class ControllerCurlIntervalsTask extends ControllerCurlIntervals{
         $this->setApiType('json');
         $this->setCurlUrl($this->buildUrl());
         parent::__construct();
-        
     }
+
+    /**
+     * check requests and do some validation and determine whether we are getting or setting     
+     * @return <type>
+     */
     
     public function checkRequests(){
         ( isset($_REQUEST['assigneeId']) && is_numeric($_REQUEST['assigneeId']) ? $this->aParams[] = 'assigneeId=' . intval($_REQUEST['asigneeId'])  : null  ); //your assignee id
@@ -53,17 +57,30 @@ class ControllerCurlIntervalsTask extends ControllerCurlIntervals{
         $queryString = ( isset($_REQUEST['update']) ? intval($_REQUEST['taskid']) . '/' : '?' . ( implode('&',$this->aParams) ) );
         $url = INTERVALS_API_URL . '/task/' . $queryString ;        
         return $url;
-    }    
+    } 
     
+    /**
+     * gets the return data from the api
+     * @return array 
+     */ 
     public function getCurlIntervalsTask(){
         return $this->getCurlIntervals();
     }
-    public function setCurlPut(){
-        //echo '<h4>',json_encode($this->getUpdateParams()),'</h4>';
+    
+    /**
+     * if wanting to set/update a reource in the api then call this to pass PUT your data in JSON format
+     * @return string url
+     */ 
+    public function setCurlPut(){        
         $this->setCurlOptPut(true);
         $this->setCurlPostVal(json_encode($this->getUpdateParams()));       
         
     }
+
+    /**
+     * create an aray of key => pair values that you want to use to update your Intervals reource
+     * @return <type>
+     */
     
     public function getUpdateParams(){
         return array('title'=>$_REQUEST['title']);
