@@ -27,7 +27,9 @@ class ControllerCurlIntervalsTask extends ControllerCurlIntervals{
     }
 
     /**
-     * check requests and do some validation and determine whether we are getting or setting     
+     * check requests and do some validation and determine whether we are getting or setting 
+     * if getting we build query string values $this->aParams[] which relate to filters here http://www.myintervals.com/api/resource.php?r=task
+     * need to complete the list
      * @return <type>
      */
     
