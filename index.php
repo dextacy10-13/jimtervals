@@ -7,5 +7,6 @@ include('app/config.php');
     <ul>
         <li><a href="milestone.php">Generate Milestone Task Spreadsheets</a></li>
         <li><a href="taskOpen.php?excludeclosed=1&limit=20">Display 20 Open Tasks</a></li>
+        <li><a href="taskOpen.php?localid=2656">Get Task2656</a></li>
     </ul>
 </nav>

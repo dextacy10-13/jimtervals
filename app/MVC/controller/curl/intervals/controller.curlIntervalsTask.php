@@ -25,29 +25,30 @@ class ControllerCurlIntervalsTask extends ControllerCurlIntervals{
         $this->setCurlUrl($this->buildUrl());
         parent::__construct();
     }
-
+    
     /**
      * check requests and do some validation and determine whether we are getting or setting 
      * if getting we build query string values $this->aParams[] which relate to filters here http://www.myintervals.com/api/resource.php?r=task
      * need to complete the list
      * @return <type>
      */
-    
     public function checkRequests(){
-        ( isset($_REQUEST['assigneeId']) && is_numeric($_REQUEST['assigneeId']) ? $this->aParams[] = 'assigneeId=' . intval($_REQUEST['asigneeId'])  : null  ); //your assignee id
+    
+        $aStrResourceKeys = array('title','search','sortfield','sortdir');        
+        $aIntResourceKeys = array(
+            'localid','personid','includetimerid','assigneeid','followerid','statusid','clientid','projectid','moduleid','milestoneid',
+            'hasduedate','ownerid','priorityid','tasklistfilterid','overdue','excludeclosed','hastaskrelation','offset','limit'
+        );
+        $aDateResourceKeys = array('dateopen','datedue');
         
-        ( isset($_REQUEST['milestone']) && is_numeric($_REQUEST['milestone']) ? $this->aParams[] = 'milestoneid=' . intval($_REQUEST['milestone'])  : null );
+        foreach($aStrResourceKeys as $strResourceKey){
+            ( isset($_REQUEST[$strResourceKey]) ? $this->aParams[] = $strResourceKey . '=' . Sanitize::sanitizeString($_REQUEST[$strResourceKey])  : null );
+        }    
         
-        ( isset($_REQUEST['taskid']) && is_numeric($_REQUEST['taskid']) ? $this->aParams[] = 'localid=' . intval($_REQUEST['taskid'])  : null );
-        
-        ( isset($_REQUEST['clientid']) && is_numeric($_REQUEST['clientid']) ? $this->aParams[] = 'clientid=' . intval($_REQUEST['clientid'])  : null );
-        
-        ( isset($_REQUEST['excludeclosed']) && is_numeric($_REQUEST['excludeclosed']) ? $this->aParams[] = 'excludeclosed=' . intval($_REQUEST['excludeclosed'])  : null );
-        
-        ( isset($_REQUEST['limit']) && is_numeric($_REQUEST['limit']) ? $this->aParams[] = 'limit=' . intval($_REQUEST['limit'])  : null );
-        
-        ( isset($_REQUEST['search']) ? $this->aParams[] = 'search=' . $_REQUEST['search']  : null );
-        
+        foreach($aIntResourceKeys as $intResourceKey){
+            ( isset($_REQUEST[$intResourceKey]) && is_numeric($_REQUEST[$intResourceKey]) ? $this->aParams[] = $intResourceKey . '=' . intval($_REQUEST[$intResourceKey])  : null  );
+        }
+
         ( isset($_REQUEST['update']) ? $this->setCurlPut(): null );
     }
     
@@ -56,7 +57,7 @@ class ControllerCurlIntervalsTask extends ControllerCurlIntervals{
      * @return string url
      */    
     public function buildUrl(){
-        $queryString = ( isset($_REQUEST['update']) ? intval($_REQUEST['taskid']) . '/' : '?' . ( implode('&',$this->aParams) ) );
+        $queryString = ( isset($_REQUEST['update']) ? intval($_REQUEST['localid']) . '/' : '?' . ( implode('&',$this->aParams) ) );
         $url = INTERVALS_API_URL . '/task/' . $queryString ;        
         return $url;
     } 
